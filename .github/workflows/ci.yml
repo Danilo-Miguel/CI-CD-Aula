@@ -35,5 +35,5 @@ jobs:
 
       # Adicionar um teste básico para rodar a compilação
       - name: Verificar o build
-        working-directory: ./ci-cd  # Garante que o Maven rode no diretório correto
+        working-directory: ./aulacicd  # Garante que o Maven rode no diretório correto
         run: mvn compile
