@@ -1,0 +1,39 @@
+name: Maven CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+  	# Checkout do repositório
+      - name: Checkout do repositório
+        uses: actions/checkout@v3
+
+    # Listar arquivos e diretórios (debug)
+      - name: Listar arquivos para verificar diretório
+        run: ls -R
+
+ # Configura Java 11
+      - name: Configurar JDK 11
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
+  # Rodar o Maven para construir o projeto
+      - name: Compilar projeto com Maven
+        working-directory: ./ci-cd  # Caminho correto para o seu pom.xml
+        run: mvn clean install
+
+ # Adicionar um teste básico para rodar a compilação
+      - name: Verificar o build
+        working-directory: ./ci-cd  # Garante que o Maven rode no diretório correto
+        run: mvn compile
